@@ -4,6 +4,15 @@ from mongo import mongoFront
 
 handle = mongoFront()
 
+##############################################################
+# Author: Vineel Koneru
+# This funciton is to connect news website and extract all 
+# the necessary HTML info (eg title, main points, cotnent etc..  
+# from the news articles and parse the information. finally 
+# calling databse funciton to upload into mongo collections.
+############################################################
+
+
 class StackOverflowSpider(scrapy.Spider):
     name = 'guardian'
     start_urls = ["http://www.theguardian.com/news/2016/apr/05/all" ]

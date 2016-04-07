@@ -2,7 +2,13 @@ import os
 import pymongo
 import ssl
 
-
+############################################################
+# Author: Vineel Koneru
+# This funciton is to connect articles database using 
+# tester:tester credetials and insert news info into test 
+# collection using pymongo
+#
+############################################################a
 
 class mongoFront:                         
     MONGODB_URL = "mongodb://tester:tester@aws-us-east-1-portal.12.dblayer.com:10652/articles"
