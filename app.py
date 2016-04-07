@@ -34,7 +34,9 @@ def article():
     req_json = request.get_json()
     if req_json:
         matched_records = handle.find_one_article(req_json["url"])
-
+	return jsonify(matched_records)
+    else:
+        return jsonify({"status": "failed", "reason": "improper inputs"})
 if __name__ == "__main__":
     app.debug = True
     app.run(host='0.0.0.0',port=80) 
