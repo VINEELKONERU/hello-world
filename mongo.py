@@ -32,3 +32,25 @@ class mongoFront:
             each_record["url"] = each_article["url"]
             datatosend["articles"].append(each_record)
 	return datatosend
+    def find_body(self,body):
+        print "finding titles with " + body
+        # print self.db.collection_names()
+        found_articles = self.db.test2.find({ "body": { "$elemMatch":  { "$regex": body, "$options": "i" } } })
+        datatosend = { "articles": [] }
+        for each_article in found_articles:
+            print each_article["title"]
+            each_record = {}
+            each_record["title"] = each_article["title"]
+            each_record["url"] = each_article["url"]
+            datatosend["articles"].append(each_record)
+        return datatosend
+
+    def find_one_article(self,url):
+        print "finding titles with " + url
+        # print self.db.collection_names()
+        found_articles = self.db.test2.find({ "url": url }, { "_id": 0 })
+        datatosend = { "articles": [] }
+        for each_article in found_articles:
+            print each_article["title"]
+            datatosend["articles"].append(each_article)
+        return datatosend
