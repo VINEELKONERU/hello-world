@@ -21,15 +21,17 @@ class StackOverflowSpider(scrapy.Spider):
         count = 0
         for href in response.css('.fc-container__inner .fc-slice-wrapper .fc-item__container .fc-item__content a::attr(href)'):
             full_url = response.urljoin(href.extract())
-            print full_url
+            #print full_url
             count = count + 1
             yield scrapy.Request(full_url, callback=self.parse_each_link)
         print "totally " + str(count) + " links"
         # yield scrapy.Request("http://www.theguardian.com/news/commentisfree/2016/apr/05/panama-papers-britain-house-order-cameron", callback=self.parse_each_link)
 
     def parse_each_link(self, response):
-        print response
+        print "response is..", response
+        #print "response.rul", response.url
         datatowrite = {}
+        datatowrite['url'] = response.url
         datatowrite['title'] = response.css('.content__headline::text ').extract()[0]
         datatowrite['minExplanation'] = response.css('.content__standfirst::text').extract()[1]
         datatowrite['points'] = []

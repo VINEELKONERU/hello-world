@@ -19,4 +19,16 @@ class mongoFront:
     def upload(self,data):
         print "uploading data to mongodb "
         # print self.db.collection_names()
-        print self.db.test.insert_one(data)
+        print self.db.test2.insert_one(data)
+    def find_title(self,title):
+        print "finding titles with " + title
+        # print self.db.collection_names()
+        found_articles = self.db.test2.find({ "title": { "$regex": title, "$options": "i" }})
+        datatosend = { "articles": [] }
+        for each_article in found_articles:
+            print each_article["title"]
+	    each_record = {}
+            each_record["title"] = each_article["title"]
+            each_record["url"] = each_article["url"]
+            datatosend["articles"].append(each_record)
+	return datatosend
